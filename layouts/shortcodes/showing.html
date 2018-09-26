@@ -1,0 +1,42 @@
+<!-- Shortcode for showing ingredients
+TODO Add option to scale single ingredients
+-->
+<table class="center" >
+  <!-- TODO add translation -->
+  <tr>
+    <th> {{i18n "ingredients"}} </th>
+    <th> {{i18n "quantity"}}  </th>
+  </tr>
+<!-- Convert input into usable array -->
+{{$scalestring := .Get "scale"}} <!-- Value between 0-1-->
+{{$scales := (split $scalestring ", ")}}
+{{$ingredientsstring := .Get "ingredients"}}
+{{$ingredients := (split $ingredientsstring ", ")}}
+
+
+  {{range $index, $ingredient := ($ingredients) }}
+  <tr>
+    {{$.Scratch.Set "ownpage" false}}
+    {{$unitstring := printf "%s%s%s" "ingredients." $ingredient ".unit"}}
+    {{$quantitystring := printf "%s%s%s" "ingredients." $ingredient ".quantity"}}
+    {{range (where $.Page.Site.Pages "Type" "ingredients").ByTitle}}
+       {{$home := . }}
+      {{if eq $home.Params.name $ingredient}}
+       {{$.Scratch.Set "ownpage" true}}
+       <td><a href="{{.Permalink}}">{{.Title}}</a></td>
+      {{end}}
+    {{end}}
+    {{if not ($.Scratch.Get "ownpage")}}
+    {{$lang := $.Site.Language}}
+    {{$ingredientlang := printf "%s%s%s" $ingredient "." $lang}}
+    {{if isset $.Site.Data.ingredients $ingredientlang }}
+      <td>{{(index $.Site.Data.ingredients $ingredientlang).title }}</td>
+    {{else}}
+      <td>No data found for {{$ingredient}}</td>
+    {{end}}
+    {{end}}
+    <!-- TODO replace "." with "," depending on language -->
+  <td>{{mul (float ($.Page.Param $quantitystring)) (float (index $scales $index))}}{{$.Page.Param $unitstring}}</td>
+</tr>
+ {{end}}
+</table>

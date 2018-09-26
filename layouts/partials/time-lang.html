@@ -1,0 +1,11 @@
+<!-- TODO automatically convert units if feasable -->
+{{$lang := printf "%s" $.Site.Language }}
+
+{{$value := $.Param "time.value" }}
+{{$unit := $.Param "time.unit"}}
+
+{{$valueactive := $.Param "timeactive.value"}}
+{{$unitactive := $.Param "timeactive.unit"}}
+<span class="top-time">{{i18n "active-time"}}: {{$valueactive}} {{i18n $unitactive}}</span>
+<span> / </span>
+<span class="top-time">{{i18n "total-time"}}: {{$value}} {{i18n $unit}}</span>

@@ -1,0 +1,6 @@
+{{$lang := printf "%s" $.Site.Language }}
+{{ if eq $lang "de"}}
+  <span class="date">{{ .Date.Day }} {{ index $.Site.Data.monthsde (printf "%d" .Date.Month)  }} {{ .Date.Year }}</span>
+{{ else }}
+  <span class="date">{{ .Date.Format "02 January 2006" }}</span>
+{{ end }}

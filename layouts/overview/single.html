@@ -1,0 +1,38 @@
+{{ define "body" }}
+
+<body class="page-template-default page ct-body singular singular-page not-front standard">
+{{ end }}
+
+  {{ define "main" }}
+  <div id="main" class="main" role="main">
+  	<div id="loop-container" class="loop-container">
+  		<div class="entry">
+  		<div class="entry-header">
+  		<h1 class="entry-title">{{ .Title }}</h1>
+  	</div>
+  	<div class="entry-container">
+  		<div class="entry-content">
+  			<article>
+          {{ .Content }}
+        </article>
+
+        <!-- For loop in hugo over an array (alphapet) -->
+        {{ $section := .Section }} <!-- Get current section, because we want to use overview in mutiple sections not only in one specifc-->
+        {{ range $aletter := (slice "A" "B" "C" "D" "E" "F" "G" "H" "J" "K" "L" "M" "N" "O" "P" "Q" "R" "S" "T" "U" "V" "W" "X" "Y" "Z")}}
+        <!-- TODO add option to hide letter if no content is availible -->
+         {{$aletter}}
+         <ul>
+          {{range  sort (where (where $.Page.Site.Pages "Type" $section) "IsPage" true) "Title" }}
+            {{ $letter := printf "%s" .Params.firstletter }}
+            {{ if eq $letter $aletter}}
+              <li><a href="{{.Permalink}}">{{.Title}}</a></li>
+            {{ end }}
+          {{ end }}
+        </ul>
+        {{ end }}
+  		</div>
+  			</div>
+  </div>
+  </div>
+  </div>
+  {{ end }}

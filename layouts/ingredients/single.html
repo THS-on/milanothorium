@@ -18,25 +18,25 @@
 
         {{ end }}
         <div class="entry-meta">
-          <span class="date">{{ .Date.Format "02 January" }}</span>	<span> / </span>
-
-          <span class="author">
-            {{ if and (isset .Site.Params "authorlink") .Site.Params.authorLink }}
-            <a href="{{ .Site.Params.authorLink | default "" | absURL}}" title="Posts by {{ .Site.Params.author | default "" }}" rel="author">{{ .Site.Params.author | default ""}}</a>
-            {{ else }}
-            {{ .Site.Params.author | default "" }}
-            {{ end }}
-          </span>
-
-
-          {{ range .Params.categories }}
+	        {{$lang := printf "%s" $.Site.Language }}
+          {{ if eq $lang "de"}}
+          {{if isset .Params "kategorien"}}
+          {{ range .Params.kategorien }}
           <span class="category">
-            <span> / </span>
-
-            <a href="/categories{{ . | relURL }}">{{ . }}</a>
+              <a href="/kategorien{{ . | relURL }}">{{ . }}</a>
           </span>
           {{ end }}
-
+          {{ end }}
+          {{ end }}
+          {{ if eq $lang "en"}}
+          {{if isset .Params "categories"}}
+          {{ range .Params.categories }}
+          <span class="category">
+              <a href="/categories{{ . | relURL }}">{{ . }}</a>
+          </span>
+          {{ end }}
+          {{ end }}
+          {{ end }}
 
         </div>
         <div class='entry-header'>
@@ -47,6 +47,18 @@
             <article>
               {{ .Content }}
             </article>
+            <span>{{i18n "used-in"}}</span>
+            <ul>
+             {{range (where $.Page.Site.Pages "Type" "recipes").ByTitle}}
+                {{$home := . }}
+                {{$name := $.Params.name }}
+                {{range   $key, $value := ($home.Params.ingredients) }}
+                  {{if eq $key $name}}
+                      <li><a href="{{$home.Permalink}}">{{$home.Title}}</a></li>
+                  {{end}}
+                {{end }}
+
+             {{ end }}
           </div>
           <!--  <div class="sidebar sidebar-after-post-content" id="sidebar-after-post-content">
           <section id="text-2" class="widget widget_text"><h2 class="widget-title">After Post Content Widget</h2>			<div class="textwidget"><p>This is a widget in the "After Post Content" widget area. It's a great place to include related posts or an email optin form.</p>
@@ -63,20 +75,8 @@
       <a href="https://www.competethemes.com/tracks-live-demo">Return to Blog</a>
     </p>
   </nav>-->
-
-  <div class="entry-categories"><p><span>Categories</span>
-    {{ range $index, $name := .Params.categories }}
-    <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}" title="View all posts in {{ $name }}">{{ $name }}</a>{{ end }}
-  </p>
-</div>
-
-
-
-<div class="entry-tags" style="top: 168px;"><p><span>Tags</span>
-  {{ range $index, $name := .Params.tags }}
-  <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="View all posts tagged {{ $name }}">{{ $name }}</a>
-  {{ end }}
-
+  {{ partial "categories-bottom-lang.html" . }}
+  {{ partial "tags-bottom.html" . }}
 </p></div>	</div>
 {{ if and (isset .Site.Params "author") .Site.Params.author }}
 <div class="author-meta">

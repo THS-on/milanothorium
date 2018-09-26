@@ -1,0 +1,22 @@
+<!--
+Shortcode for showing steps
+This is usefull for gernerating a recipe without the not really usefull information
+
+options
+  intro: Displays Recipe introduction
+  Numbers (e.q. 1, 2, 3): Show recipe steps
+-->
+{{$arraylength := (len $.Params)}}
+{{ $option := printf "%s" (.Get 0) }}
+  {{if eq $option "intro"}}
+    {{$.Page.Params.steps.intro}}
+  {{else}}
+      {{range $step := $.Params}}
+        {{$ingredientsstring := printf "%s%s%s" "steps." $step ".ingredients"}} <!-- Build string for ingrients map -->
+        {{range $key, $value := $.Page.Param $ingredientsstring}} <!-- Range over Map -->
+          {{$.Scratch.Add "ingredients" (slice $key)}}
+          {{$scalestring := printf "%s%s%s%s%s" "steps." $step ".ingredients." $key ".scale"}}
+          {{$.Scratch.Add "scale" ($.Page.Param $scalestring)}}
+        {{end}}
+      {{end}}
+{{end}}

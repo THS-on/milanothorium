@@ -1,103 +1,113 @@
-baseurl = "https://example.org/"
-title = "Nederburg"
-theme = "hugo-nederburg-theme"
-languageCode = "en-us"
-# Enable comments by entering your Disqus shortname
-disqusShortname = ""
-# Enable Google Analytics by entering your tracking code
+baseurl = "http://example.com"
+title = "Milanothorium"
+theme = "milanothorium"
+languageCode = "en"
+DefaultContentLanguage = "en"
+disableLanguages = ["de"] #Disable German langauge 
 googleAnalytics = ""
-preserveTaxonomyNames = true
 paginate = 5 #frontpage pagination
 
 [params]
-  # Unmark to use post folder for images. Default is static folder.
-  #usepostimgfolder = true
-  slogan = "A fast &amp; secure theme"
+  slogan = "Cooking blog"
   description = "Describe your website" # meta description
-  # You need to set author to have an author bio. If you have a writer in the markdown file it will override this.
-  author = "Göran Svensson"
-  authorLink = "https://appernetic.io/"
-  bio = [
-    "Göran is an avid blogger and the founder of <a href='https://appernetic.io/'>Appernetic.io</a>. This is the author bio shown after posts."
-  ]
   copyright = [
-    "&copy; 2018 Göran Svensson",
-    "Nederburg Hugo Theme by [Appernetic](https://appernetic.io).",
-    "A port of Tracks by Compete Themes."
-  ]
+    "&copy; 2018 YOURNAME",
+    "Based on Nederburg Hugo Theme by [Appernetic](https://appernetic.io)."
+    ]
+
+[languages]
+  [languages.de]
+    baseurl="http://example.com"
+    weight = 2
+    languageName = "Deutsch"
+    [[languages.de.menu.main]]
+      identifier = "home"
+      name       = "Home"
+      url        = "/"
+      weight     = 1
+
+    [[languages.de.menu.main]]
+      identifier = "recipes"
+      name       = "Rezepte"
+      url        = "rezepte/"
+      weight     = 2
+
+    [[languages.de.menu.main]]
+      identifier = "overview-recipes" #Hugo doesn't like if we have the same name twice, so we add an identifier
+      name       = "Übersicht"
+      parent     = "recipes"
+      url        = "/rezepte/uebersicht"
+      weight     = 1
+
+    [[languages.de.menu.main]]
+      identifier = "ingredients"
+      name       = "Zutaten"
+      url        = "zutaten/"
+      weight     = 3
+
+    [[languages.de.menu.main]]
+      identifier = "overview-ingredients"
+      name       = "Übersicht"
+      url        = "/zutaten/uebersicht"
+      parent     = "ingredients"
+      weight     = 1
+    [languages.de.taxonomies]
+      category = "kategorien"
+      tag = "tags"
+    [languages.de.permalinks]
+      ingredients = "/zutaten/:slug/"
+      recipes = "/rezepte/:slug/"
+      post = "/post/:slug"
+      about = "/:slug/"
+  [languages.en]
+    baseurl="http://example.com"
+    weight = 1
+    languageName = 1
+    title = "Title"
+    [[languages.en.menu.main]]
+      identifier = "home-en"
+      name       = "Home"
+      url        = "/"
+      weight     = 1
+
+    [[languages.en.menu.main]]
+      identifier = "recipes-en"
+      name       = "Recipes"
+      url        = "recipes/"
+      weight     = 2
+
+    [[languages.en.menu.main]]
+      identifier = "overview-recipes-en" #Hugo doesn't like if we have the same name twice, so we add an identifier
+      name       = "Overview"
+      parent     = "recipes-en"
+      url        = "/recipes/overview"
+      weight     = 1
+
+    [[languages.en.menu.main]]
+      identifier = "ingredients-en"
+      name       = "Ingredients"
+      url        = "ingredients/"
+      weight     = 3
+
+    [[languages.en.menu.main]]
+      identifier = "overview-ingredients-en"
+      name       = "Overview"
+      url        = "/ingredients/overview"
+      parent     = "ingredients-en"
+      weight     = 1
+
+    [languages.en.taxonomies]
+      category = "categories"
+      tag      = "tags"
+    [languages.en.permalinks]
+        ingredients = "/ingredients/:slug/"
+        recipes = "/recipes/:slug/"
+        about = "/:slug/"
+        post = "/post/:slug"
+    [languages.en.params]
+        slogan = "Your own slogan"
 
 
-  # Contact page
-     # Since this template is static, the contact form uses www.formspree.io as a
-     # proxy. The form makes a POST request to their servers to send the actual
-     # email. Visitors can send up to a 1000 emails each month for free.
-     #
-     # What you need to do for the setup?
-     #
-     # - set your email address under 'email' below (it is also used in Gravatar for the bio).
-     # - upload the generated site to your server
-     # - send a dummy email yourself to confirm your account
-     # - click the confirm link in the email from www.formspree.io
-     # - you're done. Happy mailing!
-  email = "goran@molnsys.com"
-
-  # Nav links in the side bar
-  [[menu.main]]
-  name = "Home"
-  url = "/"
-  weight = 1
-
-  [[menu.main]]
-  name = "About"
-  url = "about/"
-  weight = 2
-
-  [[menu.main]]
-  name = "Get in touch"
-  url = "contact/"
-  weight = 3
-
-# this will also be in author bio if there is no writer.
-  [params.social]
-  facebook      = "full Social profile url in facebook"
-  googleplus    = "full profile url in googleplus"
-  email         = "email@example.com"
-  twitter       = "full profile url in twitter"
-  linkedin      = "full profile url in linkedin"
-  stackoverflow = "full profile url in stackoverflow"
-  instagram     = "full profile url in instagram"
-  github        = "full profile url in github"
-  pinterest     = "full profile url in pinterest"
+[params.social]
+  email         = "test@example.com"
   rss           = true
-
-# Add a writer, then use it in the markdown front matter like this: writer = "Lukas Herman"
-  [params.writers]
-    [params.writers."Lukas Herman"]
-    link = "https://lherman.tk"
-    email = "lherman.cs@gmail.com"
-    bio = [
-      "Lukas has a few skills up his sleve. He can fly blindfolded under a bridge while simultanous writing blog posts."
-    ]
-    facebook      = "full lukas profile url in facebook"
-    googleplus    = "full profile url in googleplus"
-    twitter       = "full profile url in twitter"
-    linkedin      = "full profile url in linkedin"
-    stackoverflow = "full profile url in stackoverflow"
-    instagram     = "full profile url in instagram"
-    github        = "full profile url in github"
-    pinterest     = "full profile url in pinterest"
-
-    [params.writers."Göran Svensson"]
-    link = "https://appernetic.io/"
-    email = "goran@molnsys.com"
-    bio = [
-      "Göran is an avid blogger and the founder of <a href='https://appernetic.io/'>Appernetic.io</a>. This is the author bio shown after posts."
-    ]
-    facebook      = "full Göran profile url in facebook"
-    googleplus    = "full profile url in googleplus"
-    twitter       = "full profile url in twitter"
-    linkedin      = "full profile url in linkedin"
-    stackoverflow = "full profile url in stackoverflow"
-    instagram     = "full profile url in instagram"
-    github        = "full profile url in github"
-    pinterest     = "full profile url in pinterest"

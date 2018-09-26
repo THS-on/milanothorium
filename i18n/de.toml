@@ -1,0 +1,54 @@
+[quantity]
+other = "Menge"
+
+[ingredients]
+other = "Zutaten"
+
+[category]
+other = "Kategorie"
+
+[categories]
+other = "Kategorien"
+
+[continue-reading]
+other = "Weiterlesen"
+
+[read-the-recipe]
+other = "Rezept lesen"
+
+[read-the-post]
+other = "Post lesen"
+
+[more-information]
+other = "Mehr Informationen"
+
+[used-in]
+other = "Wird benutzt in"
+
+[previous-post]
+other = "Vorheriger Post"
+
+[no-previous-post]
+other = "Kein vorheriger Post"
+
+[return-to-blog]
+other = "Zrück zum Blog"
+
+[next-post]
+other = "Nächster Post"
+
+[no-next-post]
+other = "Kein nächster Post"
+
+[active-time]
+other = "Aktive Zeit"
+
+[total-time]
+other = "Zeit gesammt"
+
+[h]
+#TODO add diffrent pural and single form
+other = "Stunden"
+
+[min]
+other = "Minuten"

@@ -10,7 +10,7 @@
         "name" : "{{ .Title }}",
         "headline" : "{{ .Title }}",
         "description" : "{{ if .Description }}{{ .Description }}{{ else }}{{if .IsPage}}{{ .Summary }}{{ end }}{{ end }}",
-        "inLanguage" : "en",
+        "inLanguage" : "{{.Site.LanguageCode}}",
         "author" : "{{ .Page.Params.author }}",
         "creator" : "{{ .Page.Params.author }}",
         "publisher": "{{ .Page.Params.author }}",
@@ -22,6 +22,6 @@
         "url" : "{{ .Permalink }}",
         "wordCount" : "{{ .WordCount }}",
         "image" : {{ printf "%s%s" .Site.BaseURL .Page.Params.image }}",
-        "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }}"Blog" ]   
+        "keywords" : [ {{ if isset .Params "tags" }}{{ range .Params.tags }}"{{ . }}",{{ end }}{{ end }}"Blog" ]
     }
     </script>

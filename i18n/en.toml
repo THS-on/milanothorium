@@ -1,0 +1,54 @@
+[quantity]
+other = "Quantity"
+
+[ingredients]
+other = "Ingredients"
+
+[category]
+other = "category"
+
+[categories]
+other = "categories"
+
+[continue-reading]
+other = "Continue reading"
+
+[read-the-recipe]
+other = "Read the recipe"
+
+[read-the-post]
+other = "Read the post"
+
+[more-information]
+other = "more information"
+
+[used-in]
+other = "used in"
+
+[previous-post]
+other = "Previous Post"
+
+[no-previous-post]
+other = "No previous post"
+
+[return-to-blog]
+other = "Return to Blog"
+
+[next-post]
+other = "Next Post"
+
+[no-next-post]
+other = "No next Post"
+
+[active-time]
+other = "active time"
+
+[total-time]
+other = "total time"
+
+[h]
+#TODO add diffrent pural and single form
+other = "hours"
+
+[min]
+other = "minutes"

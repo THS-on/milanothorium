@@ -18,25 +18,8 @@
 
         {{ end }}
         <div class="entry-meta">
-          <span class="date">{{ .Date.Format "02 January" }}</span>	<span> / </span>
-
-          <span class="author">
-            {{ if and (isset .Site.Params "authorlink") .Site.Params.authorLink }}
-            <a href="{{ .Site.Params.authorLink | default "" | absURL}}" title="Posts by {{ .Site.Params.author | default "" }}" rel="author">{{ .Site.Params.author | default ""}}</a>
-            {{ else }}
-            {{ .Site.Params.author | default "" }}
-            {{ end }}
-          </span>
-
-
-          {{ range .Params.categories }}
-          <span class="category">
-            <span> / </span>
-
-            <a href="/categories{{ . | relURL }}">{{ . }}</a>
-          </span>
-          {{ end }}
-
+        {{partial "date-lang.html" .}}
+        {{partial "categories-top-lang.html" .}}
 
         </div>
         <div class='entry-header'>
@@ -53,29 +36,28 @@
         </div>
       </section>	</div>-->
       <div class='entry-meta-bottom float'>
-        <!--<nav class="further-reading">
+        <nav class="further-reading">
         <p class="prev">
-        <span>Previous Post</span>
-        <a href="https://www.competethemes.com/tracks-live-demo/another-awesome-post/">Another Awesome Post</a>
-      </p>
-      <p class="next">
-      <span>No Newer Posts</span>
-      <a href="https://www.competethemes.com/tracks-live-demo">Return to Blog</a>
-    </p>
-  </nav>-->
-
-  <div class="entry-categories"><p><span>Categories</span>
-    {{ range $index, $name := .Params.categories }}
-    <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}" title="View all posts in {{ $name }}">{{ $name }}</a>{{ end }}
-  </p>
-</div>
-
-
-
-<div class="entry-tags" style="top: 168px;"><p><span>Tags</span>
-  {{ range $index, $name := .Params.tags }}
-  <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="View all posts tagged {{ $name }}">{{ $name }}</a>
-  {{ end }}
+        {{if .PrevInSection}}
+        <span>{{ i18n "previous-post" }}</span>
+          <a href="{{.PrevInSection.Permalink}}">{{.PrevInSection.Title}}</a>
+          {{else}}
+          <span>{{i18n "no-previous-post"}}</span>
+            <a href="{{.Site.BaseURL}}">{{ i18n "return-to-blog" }}</a>
+          {{end}}
+        </p>
+        <p class="next">
+        {{if .NextInSection}}
+        <span>{{i18n "next-post"}}</span>
+        <a href="{{.NextInSection.Permalink}}">{{.NextInSection.Title}}</a>
+        {{else}}
+        <span>{{i18n "no-next-post"}}</span>
+          <a href="{{.Site.BaseURL}}">{{i18n "return-to-blog"}}</a>
+        {{end}}
+       </p>
+      </nav>
+  {{ partial "categories-bottom-lang.html" . }}
+  {{ partial "tags-bottom.html" .}}
 
 </p></div>	</div>
 {{ if and (isset .Site.Params "author") .Site.Params.author }}

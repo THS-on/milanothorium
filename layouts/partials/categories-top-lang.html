@@ -1,0 +1,21 @@
+{{$lang := printf "%s" $.Site.Language }}
+{{if eq $lang "de"}}
+  {{if isset .Params "kategorien"}}
+    {{ range .Params.kategorien }}
+      <span> / </span>
+      <span class="category">
+          <a href="{{ "/kategorien/" | relLangURL }}{{ . | lower | urlize }}">{{ . }}</a>
+      </span>
+    {{ end }}
+  {{ end }}
+{{ end }}
+{{if eq $lang "en"}}
+  {{if isset .Params "categories"}}
+    {{ range .Params.categories }}
+      <span> / </span>
+      <span class="category">
+          <a href="{{ "/categories/" | relLangURL }}{{ . | lower | urlize }}">{{ . }}</a>
+      </span>
+    {{ end }}
+  {{ end }}
+{{ end }}

@@ -1,0 +1,77 @@
+<h1 class="screen-reader-text">Posts</h1>
+
+<div id="loop-container" class="loop-container">
+	{{ $paginator := .Paginate (where (where .Site.Pages "Type" "ingredients") "IsPage" true) }}
+	{{ range $index, $element := .Paginator.Pages.ByTitle }}
+	{{ if and (isset .Params "image") .Params.image }}
+	{{ if eq (mod $index 2) 0 }}
+	<div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-memories tag-normal-post tag-standard-2 excerpt zoom full-without-featured odd excerpt">
+		{{ else }}
+		<div class="post type-post status-publish format-standard has-post-thumbnail hentry category-design tag-memories tag-normal-post tag-standard-2 excerpt zoom full-without-featured odd excerpt">
+			{{ end }}
+			{{ else }}
+
+			<div class="post type-post status-publish format-standard hentry category-standard category-travel excerpt zoom full-without-featured odd excerpt">
+
+				{{ end }}
+
+				{{ if and (isset .Params "image") .Params.image }}
+				<a class="featured-image-link" href="{{ .Permalink }}">
+					<div class="featured-image"
+								style="background-image: url({{ .Params.image | absURL }});background-position: center;">
+					</div>
+				</a>
+
+				{{ end }}
+				<div class="excerpt-container">
+					<div class="excerpt-meta">
+
+						{{ if and (isset .Site.Params "author") .Site.Params.author }}
+
+						<span class="author">
+							{{ if and (isset .Site.Params "authorlink") .Site.Params.authorLink }}
+							<a href="{{ .Site.Params.authorLink | default "" | absURL }}" title="Posts by {{ .Site.Params.author | default "" }}" rel="author">{{ .Site.Params.author  | default "" }}</a>
+							{{ else }}
+							{{ .Site.Params.author | default "" }}
+							{{ end }}
+						</span>
+						{{ end }}
+
+						{{$lang := printf "%s" $.Site.Language }}
+								{{if eq $lang "de"}}
+									{{if isset .Params "kategorien"}}
+										{{ range .Params.kategorien }}
+											<span> / </span>
+											<span class="category">
+													<a href="/kategorien{{ . | relURL }}">{{ . }}</a>
+											</span>
+										{{ end }}
+									{{ end }}
+								{{ end }}
+								{{if eq $lang "en"}}
+									{{if isset .Params "categories"}}
+										{{ range .Params.categories }}
+											<span> / </span>
+											<span class="category">
+													<a href="/categories{{ . | relURL }}">{{ . }}</a>
+											</span>
+										{{ end }}
+									{{ end }}
+								{{ end }}
+					</div>
+					<div class='excerpt-header'>
+						<h2 class='excerpt-title'>
+							<a href="{{ .Permalink }} "> {{ .Title }} </a>
+						</h2>
+					</div>
+					<div class='excerpt-content'>
+						<article>
+							{{ .Summary }}
+
+							<div class="more-link-wrapper"><a class="more-link" href="{{ .Permalink }}">{{i18n "more-information"}}</a></div>
+						</article>
+					</div>
+				</div>
+			</div>
+			{{ end }}
+		</div>

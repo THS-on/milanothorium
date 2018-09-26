@@ -3,7 +3,6 @@
 <body class="post-template-default single single-post single-format-standard ct-body singular singular-post not-front standard">
   {{ end }}
 
-
   {{ define "main" }}
   <div id="loop-container" class="loop-container">
     {{ if and (isset .Params "image") .Params.image }}
@@ -18,7 +17,7 @@
 
         {{ end }}
         <div class="entry-meta">
-          <span class="date">{{ .Date.Format "02 January" }}</span>	<span> / </span>
+          {{partial "date-lang.html" .}}
 
           <span class="author">
             {{ if and (isset .Site.Params "authorlink") .Site.Params.authorLink }}
@@ -28,19 +27,14 @@
             {{ end }}
           </span>
 
-
-          {{ range .Params.categories }}
-          <span class="category">
-            <span> / </span>
-
-            <a href="/categories{{ . | relURL }}">{{ . }}</a>
-          </span>
-          {{ end }}
-
+          {{ partial "categories-top-lang.html" .}}
 
         </div>
         <div class='entry-header'>
           <h1 class='entry-title'> {{ .Title }}</h1>
+        </div>
+        <div class="entry-meta">
+          {{ partial "time-lang.html" .}}
         </div>
         <div class="entry-container">
           <div class="entry-content">
@@ -64,18 +58,9 @@
     </p>
   </nav>-->
 
-  <div class="entry-categories"><p><span>Categories</span>
-    {{ range $index, $name := .Params.categories }}
-    <a href="{{ "/categories/" | relLangURL }}{{ $name | urlize }}" title="View all posts in {{ $name }}">{{ $name }}</a>{{ end }}
-  </p>
-</div>
+{{partial "categories-bottom-lang.html" . }}
 
-
-
-<div class="entry-tags" style="top: 168px;"><p><span>Tags</span>
-  {{ range $index, $name := .Params.tags }}
-  <a href="{{ "/tags/" | relLangURL }}{{ $name | urlize }}" title="View all posts tagged {{ $name }}">{{ $name }}</a>
-  {{ end }}
+{{partial "tags-bottom.html" . }}
 
 </p></div>	</div>
 {{ if and (isset .Site.Params "author") .Site.Params.author }}
@@ -204,8 +189,5 @@ title="pinterest icon"></i>
 
 </section>
 </div>
-
-<!--</div>--> <!-- .main -->
-
 
 {{ end }}

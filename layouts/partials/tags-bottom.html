@@ -1,0 +1,6 @@
+{{if isset .Params "tags" }}
+  <div class="entry-tags" style="top: 168px;"><p><span>Tags</span>
+    {{ range $index, $name := .Params.tags }}
+      <a href="{{ "/tags/" | relLangURL }}{{ $name | lower | urlize }}" title="View all posts tagged {{ $name }}">{{ $name }}</a>
+    {{ end }}
+{{ end }}
