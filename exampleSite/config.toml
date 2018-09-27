@@ -3,7 +3,6 @@ title = "Milanothorium"
 theme = "milanothorium"
 languageCode = "en"
 DefaultContentLanguage = "en"
-disableLanguages = ["de"] #Disable German langauge 
 googleAnalytics = ""
 paginate = 5 #frontpage pagination
 
@@ -16,54 +15,9 @@ paginate = 5 #frontpage pagination
     ]
 
 [languages]
-  [languages.de]
-    baseurl="http://example.com"
-    weight = 2
-    languageName = "Deutsch"
-    [[languages.de.menu.main]]
-      identifier = "home"
-      name       = "Home"
-      url        = "/"
-      weight     = 1
-
-    [[languages.de.menu.main]]
-      identifier = "recipes"
-      name       = "Rezepte"
-      url        = "rezepte/"
-      weight     = 2
-
-    [[languages.de.menu.main]]
-      identifier = "overview-recipes" #Hugo doesn't like if we have the same name twice, so we add an identifier
-      name       = "Übersicht"
-      parent     = "recipes"
-      url        = "/rezepte/uebersicht"
-      weight     = 1
-
-    [[languages.de.menu.main]]
-      identifier = "ingredients"
-      name       = "Zutaten"
-      url        = "zutaten/"
-      weight     = 3
-
-    [[languages.de.menu.main]]
-      identifier = "overview-ingredients"
-      name       = "Übersicht"
-      url        = "/zutaten/uebersicht"
-      parent     = "ingredients"
-      weight     = 1
-    [languages.de.taxonomies]
-      category = "kategorien"
-      tag = "tags"
-    [languages.de.permalinks]
-      ingredients = "/zutaten/:slug/"
-      recipes = "/rezepte/:slug/"
-      post = "/post/:slug"
-      about = "/:slug/"
   [languages.en]
-    baseurl="http://example.com"
     weight = 1
     languageName = 1
-    title = "Title"
     [[languages.en.menu.main]]
       identifier = "home-en"
       name       = "Home"
@@ -104,10 +58,6 @@ paginate = 5 #frontpage pagination
         recipes = "/recipes/:slug/"
         about = "/:slug/"
         post = "/post/:slug"
-    [languages.en.params]
-        slogan = "Your own slogan"
-
-
 [params.social]
   email         = "test@example.com"
   rss           = true
